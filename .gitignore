@@ -1,0 +1,100 @@
+# ==============================================================================
+# Transkript - .gitignore
+# Privacy-hardened ignore rules for offline desktop transcription
+# ==============================================================================
+
+# Python Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Build & packaging artifacts
+build/
+dist/
+*.egg-info/
+*.spec
+*.exe
+*.msi
+
+# Application runtime data, logs & crash dumps
+*.log
+logs/
+recovery/
+hardware_profile.json
+
+# Environment variables & secrets
+.env
+.env.*
+*.pem
+*.key
+*.cert
+*.pfx
+
+# Offline Whisper model weights & caches
+models/
+model/
+downloads/
+.cache/
+
+# IDE & Editor temporary files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+Thumbs.db
+[Dd]esktop.ini
+
+# Scratch, temporary and backup files
+*.tmp
+*.temp
+*.bak
+temp_*.*
+legacy_browser_prototype/
+tests/check_dialog_exception.py
+tests/debug_file_dialog.py
+tests/reproduce_button_click.py
+
+
+
+# ------------------------------------------------------------------------------
+# PRIVACY & DATA SAFETY: Audio and Transcript Fixtures
+# ------------------------------------------------------------------------------
+# By default, ALL audio files are strictly ignored to prevent accidental leaks
+# of real participant recordings or counseling sessions.
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.flac
+*.ogg
+*.wma
+*.webm
+
+# Generated outputs and benchmark transcripts from private/real recordings
+tests/output_*.txt
+tests/reference_transcript.txt
+tests/reference_transcript_slice.txt
+tests/benchmark_*.json
+tests/experiments_summary.json
+tests/stress_test_result.json
+tests/targeted_hotwords_benchmark_results.json
+tests/concat_list.txt
+
+# SAFE SYNTHETIC TEST FIXTURES (Explicit whitelist only)
+# Only 100% synthetic TTS-generated audio containing no personal data is allowed.
+!tests/sample_15s.mp3
+!tests/sample_counseling_2m.mp3
+!tests/sample_pdr_clinical_terms.mp3

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transkript</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-body">
+  <!-- Sinematik Arka Plan Ortam Işığı -->
+  <div class="ambient-light-field" aria-hidden="true">
+    <div class="light-orb light-orb-cyan"></div>
+    <div class="light-orb light-orb-violet"></div>
+  </div>
+
+  <div class="app-shell">
+    
+    <!-- Üst Çubuk (Top Bar) -->
+    <header class="app-topbar">
+      <div class="topbar-left">
+        <div class="brand-symbol" aria-hidden="true">
+          <!-- Orijinal Geometrik Ses Frekansı Monogramı -->
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 10v4M7 6v12M11 3v18M15 7v10M19 11v2M23 10v4"/>
+          </svg>
+        </div>
+        <div class="brand-headings">
+          <div class="brand-row">
+            <h1 class="brand-title">Transkript</h1>
+            <span class="brand-version">V0</span>
+          </div>
+          <span class="brand-tagline">Yerel Türkçe Transkripsiyon</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="privacy-pill" title="Tüm ses çözümleme ve model çıkarımı %100 yerel donanımınızda çalışır">
+          <span class="privacy-dot" aria-hidden="true"></span>
+          <span class="privacy-text">Yerel işlem</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Ana Çalışma Sahnesi (Main Workspace) -->
+    <main class="workspace-layout">
+      
+      <!-- Üst Bölüm: Hero Ses Sahnesi & Kontroller -->
+      <section class="stage-section" aria-label="Ses ve İşlem Sahnesi">
+        
+        <!-- Büyük İnteraktif Ses Sahnesi (Hero Audio Surface) -->
+        <div class="audio-hero-surface state-idle" id="audioHeroCard" role="region" aria-label="Ses Dosyası Seçim Alanı">
+          
+          <!-- Arka Plan Dinamik Ses Dalgası Görseli (32 Bar Orijinal Spektrum) -->
+          <div class="waveform-spectrum" id="waveformSpectrum" aria-hidden="true">
+            <span class="wave-bar" style="--bar-h: 18%; --idx: 1;"></span>
+            <span class="wave-bar" style="--bar-h: 26%; --idx: 2;"></span>
+            <span class="wave-bar" style="--bar-h: 36%; --idx: 3;"></span>
+            <span class="wave-bar" style="--bar-h: 48%; --idx: 4;"></span>
+            <span class="wave-bar" style="--bar-h: 62%; --idx: 5;"></span>
+            <span class="wave-bar" style="--bar-h: 76%; --idx: 6;"></span>
+            <span class="wave-bar" style="--bar-h: 88%; --idx: 7;"></span>
+            <span class="wave-bar" style="--bar-h: 96%; --idx: 8;"></span>
+            <span class="wave-bar" style="--bar-h: 90%; --idx: 9;"></span>
+            <span class="wave-bar" style="--bar-h: 78%; --idx: 10;"></span>
+            <span class="wave-bar" style="--bar-h: 68%; --idx: 11;"></span>
+            <span class="wave-bar" style="--bar-h: 84%; --idx: 12;"></span>
+            <span class="wave-bar" style="--bar-h: 98%; --idx: 13;"></span>
+            <span class="wave-bar" style="--bar-h: 88%; --idx: 14;"></span>
+            <span class="wave-bar" style="--bar-h: 72%; --idx: 15;"></span>
+            <span class="wave-bar" style="--bar-h: 58%; --idx: 16;"></span>
+            <span class="wave-bar" style="--bar-h: 66%; --idx: 17;"></span>
+            <span class="wave-bar" style="--bar-h: 82%; --idx: 18;"></span>
+            <span class="wave-bar" style="--bar-h: 96%; --idx: 19;"></span>
+            <span class="wave-bar" style="--bar-h: 86%; --idx: 20;"></span>
+            <span class="wave-bar" style="--bar-h: 74%; --idx: 21;"></span>
+            <span class="wave-bar" style="--bar-h: 88%; --idx: 22;"></span>
+            <span class="wave-bar" style="--bar-h: 94%; --idx: 23;"></span>
+            <span class="wave-bar" style="--bar-h: 78%; --idx: 24;"></span>
+            <span class="wave-bar" style="--bar-h: 64%; --idx: 25;"></span>
+            <span class="wave-bar" style="--bar-h: 50%; --idx: 26;"></span>
+            <span class="wave-bar" style="--bar-h: 38%; --idx: 27;"></span>
+            <span class="wave-bar" style="--bar-h: 30%; --idx: 28;"></span>
+            <span class="wave-bar" style="--bar-h: 24%; --idx: 29;"></span>
+            <span class="wave-bar" style="--bar-h: 18%; --idx: 30;"></span>
+            <span class="wave-bar" style="--bar-h: 14%; --idx: 31;"></span>
+            <span class="wave-bar" style="--bar-h: 10%; --idx: 32;"></span>
+          </div>
+
+          <!-- Hero İçerik Katmanı -->
+          <div class="hero-stage-content">
+            
+            <!-- Boş Durum (Idle State) -->
+            <div class="hero-idle-view" id="heroIdleView">
+              <div class="hero-center-icon">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                  <line x1="12" y1="19" x2="12" y2="22"></line>
+                </svg>
+              </div>
+              <div class="hero-text-group">
+                <h2 class="hero-callout">Ses dosyanı buraya bırak veya dosya seç</h2>
+                <span class="hero-format-pill">MP3 · WAV · M4A</span>
+              </div>
+            </div>
+
+            <!-- Seçili Dosya Durumu (Selected File State Transformation) -->
+            <div class="hero-selected-view" id="heroSelectedView">
+              <div class="selected-file-badge">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18V5l12-2v13"></path>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+              </div>
+              <div class="selected-file-meta-col">
+                <span id="selectedFileName" class="file-name-text">Henüz dosya seçilmedi</span>
+                <div id="fileMeta" class="file-meta-text">MP3, WAV veya M4A dosyası seçin</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Tetikleyici Seçim Butonu -->
+          <button id="btnSelectFile" class="btn btn-hero-select" type="button">
+            <svg class="btn-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span class="btn-select-label">Dosya Seç</span>
+          </button>
+        </div>
+
+        <!-- İnce İlerleme ve İşlem Durumu (Progress & Activity Stream) -->
+        <div id="progressSection" class="progress-stream hidden" aria-live="polite">
+          <div class="stream-header">
+            <div class="stream-status-col">
+              <span class="stream-indicator-dot" aria-hidden="true"></span>
+              <span id="statusMessage" class="status-message">İşlem başlatılıyor...</span>
+            </div>
+            <span id="progressPercent" class="progress-percent">%0</span>
+          </div>
+          <div class="progress-track-wrap">
+            <div id="progressBar" class="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- Hata Bildirimi (Error Banner) -->
+        <div id="errorMessage" class="error-strip hidden" role="alert"></div>
+
+        <!-- Alt Kontrol Satırı: Özel Terimler & Birincil Eylem -->
+        <div class="controls-deck">
+          
+          <!-- Özel Terimler (Daha Zarif, İkincil Altyapı) -->
+          <div class="custom-terms-deck">
+            <div class="terms-top-row">
+              <label for="customTerms" class="terms-title">
+                Özel terimler
+              </label>
+              <span class="terms-optional-tag">İsteğe bağlı</span>
+            </div>
+            <div class="terms-input-box">
+              <input
+                type="text"
+                id="customTerms"
+                class="custom-terms-input"
+                placeholder="Alkü, Alanya Alaaddin Keykubat Üniversitesi, terapötik ittifak, ghostlamak"
+                autocomplete="off"
+                spellcheck="false"
+              />
+            </div>
+            <span class="terms-quiet-hint">Virgülle ayırarak özel isim veya klinik terim ekleyebilirsiniz.</span>
+          </div>
+
+          <!-- Birincil Eylem Butonu (Geniş, Işıltılı ve Dokunsal) -->
+          <div class="action-deck">
+            <button id="btnTranscribe" class="btn btn-action-primary" type="button" disabled>
+              <span class="btn-icon-cluster" aria-hidden="true">
+                <svg class="action-play-svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                </svg>
+              </span>
+              <span class="btn-label-text">Metne Dönüştür</span>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Alt Bölüm: Transkript Çalışma Alanı (Workspace Editor Surface) -->
+      <section class="transcript-workspace-surface" aria-label="Transkript Çalışma Alanı">
+        
+        <!-- Yapışkan Üst Araç Çubuğu (Transcript Toolbar) -->
+        <div class="transcript-toolbar">
+          <div class="toolbar-left">
+            <span class="toolbar-title">Transkript</span>
+            <span id="transcriptLiveStats" class="char-counter-pill hidden">0 karakter</span>
+          </div>
+          <div class="toolbar-right">
+            <button id="btnCopy" class="btn btn-action-copy" type="button" disabled>
+              <svg class="copy-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="copy-text-label">Kopyala</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Transkript Düzenleme Alanı ve Boş Durum -->
+        <div class="editor-viewport" id="editorViewport">
+          
+          <!-- Anlamlı ve Tasarlanmış Boş Durum (Empty State Canvas) -->
+          <div class="empty-transcript-state" id="transcriptEmptyState">
+            <div class="empty-state-symbol" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <h3 class="empty-state-title">Transkript burada oluşacak</h3>
+            <p class="empty-state-desc">Konuşma metne dönüştürüldükçe içerik bu alana akacak.</p>
+          </div>
+
+          <!-- Gerçek Transkript Metin Alanı -->
+          <textarea
+            id="transcriptText"
+            class="transcript-editor-textarea"
+            placeholder=""
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Alt Bilgi & Gizlilik / İş Akışı Çekmecesi (Footer Info Bar) -->
+    <footer class="app-footer-info">
+      <div class="info-toggle-bar">
+        
+        <!-- Yerel İşlem Görsel Akış Hattı (Local Processing Pipeline) -->
+        <div class="local-pipeline-preview" title="Yerel İşlem Mimarisi: Veri dışarı çıkmaz">
+          <span class="pipeline-node">
+            <svg class="pipeline-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"></path>
+              <circle cx="6" cy="18" r="3"></circle>
+              <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+            Ses Dosyası
+          </span>
+          <span class="pipeline-arrow" aria-hidden="true">→</span>
+          <span class="pipeline-node node-local-engine">
+            <svg class="pipeline-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            Yerel İşlem (Whisper)
+          </span>
+          <span class="pipeline-arrow" aria-hidden="true">→</span>
+          <span class="pipeline-node">
+            <svg class="pipeline-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Metin
+          </span>
+        </div>
+
+        <!-- İkincil Bilgi Açılır Butonları -->
+        <div class="info-action-buttons">
+          <button id="btnToggleWorkflow" class="btn-info-pill" type="button" aria-expanded="false" aria-controls="panelWorkflow">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>Nasıl çalışır?</span>
+          </button>
+
+          <button id="btnTogglePrivacy" class="btn-info-pill" type="button" aria-expanded="false" aria-controls="panelPrivacy">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Gizlilik ve Etik</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Çekmece Panelleri (Expandable Drawers) -->
+      <div class="info-drawer-tray">
+        
+        <!-- 1. Nasıl Çalışır Paneli -->
+        <div id="panelWorkflow" class="drawer-card hidden" role="region" aria-label="Nasıl Çalışır">
+          <div class="drawer-head">
+            <h4 class="drawer-title">Nasıl çalışır?</h4>
+            <button class="drawer-close-btn" type="button" aria-label="Kapat" data-target="panelWorkflow">✕</button>
+          </div>
+          <div class="workflow-steps-layout">
+            <div class="wf-step">
+              <span class="wf-num">01</span>
+              <div class="wf-meta">
+                <span class="wf-name">Sesini seç</span>
+                <p class="wf-desc">MP3, WAV veya M4A kaydını uygulamaya ekle.</p>
+              </div>
+            </div>
+            <div class="wf-connector" aria-hidden="true">→</div>
+            <div class="wf-step">
+              <span class="wf-num">02</span>
+              <div class="wf-meta">
+                <span class="wf-name">İstersen özel terimler ekle</span>
+                <p class="wf-desc">Kişi, kurum veya yanlış anlaşılabilecek kelimeleri önceden belirt.</p>
+              </div>
+            </div>
+            <div class="wf-connector" aria-hidden="true">→</div>
+            <div class="wf-step">
+              <span class="wf-num">03</span>
+              <div class="wf-meta">
+                <span class="wf-name">Yerelde metne dönüştür</span>
+                <p class="wf-desc">Türkçe konuşma modeli kaydı cihazında işler ve transkripti aşamalı olarak ekrana getirir.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Gizlilik ve Etik Kullanım Paneli -->
+        <div id="panelPrivacy" class="drawer-card hidden" role="region" aria-label="Gizlilik İlkeleri">
+          <div class="drawer-head">
+            <div class="drawer-head-text">
+              <h4 class="drawer-title">Gizlilik odaklı, yerel işlem</h4>
+              <p class="drawer-subtitle">Ses kayıtlarınız cihazınızda işlenir. Transkript, transkripsiyon için bulut servisi veya çevrimiçi API kullanmaz.</p>
+            </div>
+            <button class="drawer-close-btn" type="button" aria-label="Kapat" data-target="panelPrivacy">✕</button>
+          </div>
+
+          <div class="privacy-pillars-layout">
+            <div class="pillar-box">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <div class="pillar-info">
+                <span class="pillar-headline">Yerel işlem</span>
+                <p class="pillar-body">Ses ve transkript cihazınızdan çıkmaz.</p>
+              </div>
+            </div>
+
+            <div class="pillar-box">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                  <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                  <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                  <path d="M10.71 5.05A16 16 0 0 1 22.56 9"></path>
+                  <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                  <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                </svg>
+              </div>
+              <div class="pillar-info">
+                <span class="pillar-headline">Çevrimdışı kullanım</span>
+                <p class="pillar-body">Transkripsiyon internet bağlantısı olmadan çalışabilir.</p>
+              </div>
+            </div>
+
+            <div class="pillar-box">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="pillar-info">
+                <span class="pillar-headline">Gizlilik odaklı</span>
+                <p class="pillar-body">Kayıt ve transkript içerikleri tanılama loglarına yazılmaz.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ethics-disclaimer-row">
+            <svg class="disclaimer-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span class="disclaimer-text">Ses kaydı alırken ilgili kişilerin onayını almak ve yürürlükteki gizlilik kurallarına uymak kullanıcının sorumluluğundadır. Uzun işlemlerde olası kesintilere karşı geçici kurtarma verileri cihazınızda tutulabilir ve başarılı işlem sonrasında temizlenir.</span>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  </div>
+
+  <script src="motion.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
