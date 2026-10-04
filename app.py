@@ -10,7 +10,19 @@ import threading
 import webview
 
 # Modül yolu
-APP_DIR = os.path.dirname(os.path.abspath(__file__))
+if getattr(sys, "frozen", False):
+    candidates = [
+        getattr(sys, "_MEIPASS", ""),
+        os.path.dirname(sys.executable),
+    ]
+    APP_DIR = os.path.dirname(sys.executable)
+    for c in candidates:
+        if c and os.path.exists(os.path.join(c, "ui", "index.html")):
+            APP_DIR = c
+            break
+else:
+    APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
 if APP_DIR not in sys.path:
     sys.path.insert(0, APP_DIR)
 
@@ -23,6 +35,7 @@ from engine import (
     setup_logging,
     get_logger,
     parse_custom_hotwords,
+    resolve_model_path,
 )
 
 # Teşhis loglamasını başlat (Hassas transkript/ses verisi loglanmaz)
@@ -209,6 +222,44 @@ class DesktopApi:
 
 
 def main():
+    if "--smoke-test" in sys.argv:
+        try:
+            api = DesktopApi()
+            resolved_path, is_local = resolve_model_path("small")
+            audio_target = None
+            for cand in [
+                sys.argv[2] if len(sys.argv) > 2 else None,
+                os.path.join(APP_DIR, "tests", "sample_15s.mp3"),
+                os.path.join(os.getcwd(), "tests", "sample_15s.mp3")
+            ]:
+                if cand and os.path.exists(cand):
+                    audio_target = cand
+                    break
+
+            summary = {
+                "resolved_path": resolved_path,
+                "is_local": is_local,
+                "audio_target": audio_target,
+                "success": True
+            }
+            if audio_target:
+                transcribed_text = api._transcriber.transcribe(
+                    audio_path=audio_target,
+                    total_duration=15.0,
+                    on_progress=lambda p, s, t: None,
+                    hotword_mode="off"
+                )
+                summary["transcription_length"] = len(transcribed_text)
+                summary["transcription_sample"] = transcribed_text[:100]
+
+            with open("smoke_test_result.json", "w", encoding="utf-8") as f:
+                json.dump(summary, f, ensure_ascii=False, indent=2)
+            sys.exit(0)
+        except Exception as e:
+            with open("smoke_test_result.json", "w", encoding="utf-8") as f:
+                json.dump({"success": False, "error": str(e)}, f, ensure_ascii=False, indent=2)
+            sys.exit(1)
+
     api = DesktopApi()
     ui_html_path = os.path.join(APP_DIR, "ui", "index.html")
 

@@ -95,9 +95,13 @@ def resolve_model_path(model_name: str = "small") -> Tuple[str, bool]:
         candidates.append(os.path.join(env_dir, model_name))
         candidates.append(env_dir)
 
-    # 2. PyInstaller _MEIPASS
+    # 2. PyInstaller _MEIPASS / frozen
     if hasattr(sys, "_MEIPASS"):
         candidates.append(os.path.join(sys._MEIPASS, "models", model_name))
+    if getattr(sys, "frozen", False):
+        exe_dir = os.path.dirname(sys.executable)
+        candidates.append(os.path.join(exe_dir, "models", model_name))
+        candidates.append(os.path.join(exe_dir, "_internal", "models", model_name))
 
     # 3. Proje dizini içi models/
     candidates.append(os.path.join(app_dir, "models", model_name))

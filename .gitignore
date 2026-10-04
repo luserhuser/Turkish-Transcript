@@ -23,8 +23,11 @@ htmlcov/
 # Build & packaging artifacts
 build/
 dist/
+installer_output/
+Output/
 *.egg-info/
 *.spec
+!transkript.spec
 *.exe
 *.msi
 
